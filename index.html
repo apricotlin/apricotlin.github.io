@@ -11,57 +11,41 @@
     <meta property="og:image" content="image/0463.jpg"/>
     <meta property="og:site_name" content="OSO">
     <title>OAO - index</title>
-    <style>
-        .btn {
-            border: 1px solid gray;
-            background-color: gray;
-            /*position: absolute;*/
-            color: #fff;
-            padding: 5px;
-            /*right: 0px;*/
-            cursor: pointer;
-            display: inline;
-            float: right;
-            margin-left: 15px;
-        }
-        .btn:hover {
-            border: 1px solid;
-            background-color: #fff;
-            color: #000;
-        }
-    </style>
+    <link rel="stylesheet/css" href="css/index.css">
 </head>
 <body>
-    <h3>For Test XD</h3>
-    <div id="space1">
-        <div>
-            <div class="btn" onclick="fbData.FbInit()">Login</div>
-            <div class="btn" onclick="fbData.shareFb('www.google.com.tw', '測試的title', '測試XD', 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/486392_102017646675278_1690642831_n.jpg?oh=bb6c7c11c03e9d3cbfd2013d9cedf785&oe=57A55AB8');">share</div>
+    <div id="main">
+        <h3>For Test XD</h3>
+        <div id="space1">
+            <div>
+                <div class="btn" onclick="fbData.FbInit()">Login</div>
+                <div class="btn" onclick="fbData.shareFb('www.google.com.tw', '測試的title', '測試XD', 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/486392_102017646675278_1690642831_n.jpg?oh=bb6c7c11c03e9d3cbfd2013d9cedf785&oe=57A55AB8');">share</div>
+            </div>
+            <div>
+                <span class="line_btn">
+                    <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+                    <script type="text/javascript">
+                        new media_line_me.LineButton({"pc":false,"lang":"zh-hant","type":"c"});
+                    </script>
+                </span>
+            </div>
+            <div>
+                <a href="line://msg/image/(可能是剪貼簿內的檔案名稱)">傳送內建圖片 (iOS 7無效)</a>
+                <a href="line://msg/text/http://tw.yahoo.com">傳送指定文字</a>
+            </div>
+            <div>
+                <a href="http://line.naver.jp/R/msg/text/?LINE%E3%81%A7%E9%80%81%E3%82%8B%0D%0Ahttp%3A%2F%2Fline.naver.jp%2F"><img src="image/0463.jpg" width="100px" height="100px" alt="用LINE傳送" /></a>
+            </div>
         </div>
-        <div>
-            <span class="line_btn">
-                <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
-                <script type="text/javascript">
-                    new media_line_me.LineButton({"pc":false,"lang":"zh-hant","type":"c"});
-                </script>
-            </span>
+        <div id="space2">
+            <script>
+                
+            </script>
         </div>
-        <div>
-            <a href="line://msg/image/(可能是剪貼簿內的檔案名稱)">傳送內建圖片 (iOS 7無效)</a>
-            <a href="line://msg/text/http://tw.yahoo.com">傳送指定文字</a>
-        </div>
-        <div>
-            <a href="http://line.naver.jp/R/msg/text/?LINE%E3%81%A7%E9%80%81%E3%82%8B%0D%0Ahttp%3A%2F%2Fline.naver.jp%2F"><img src="image/0463.jpg" width="100px" height="100px" alt="用LINE傳送" /></a>
-        </div>
-    </div>
-    <div id="space2">
-        <script>
-            
-        </script>
     </div>
 </body>
 <script src="js/jquery-1.12.3.min.js"></script>
-<script src="js/fb.js"></script>
+<!-- <script src="js/fb.js"></script> -->
 <script>
     FB.api(
         '/me',
