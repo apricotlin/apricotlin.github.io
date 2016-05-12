@@ -1,21 +1,29 @@
+body {
+	background-color: #FCFCFC;
+}
 #main {
-    width: 70%;
-    max-width: 1180px;
+	width: 70%;
+	max-width: 1180px;
+	margin: auto;
+	background: rgba(255, 255, 255, 0.9);
 }
 .btn {
-    border: 1px solid gray;
-    background-color: gray;
-    /*position: absolute;*/
-    color: #fff;
-    padding: 5px;
-    /*right: 0px;*/
-    cursor: pointer;
-    display: inline;
-    float: right;
-    margin-left: 15px;
+	border: 1px solid gray;
+	background-color: gray;
+	/*position: absolute;*/
+	color: #fff;
+	padding: 5px;
+	/*right: 0px;*/
+	cursor: pointer;
+	display: inline;
+	/*float: right;*/
+	margin-left: 15px;
 }
 .btn:hover {
-    border: 1px solid;
-    background-color: #fff;
-    color: #000;
+	border: 1px solid;
+	background-color: #fff;
+	color: #000;
+}
+.space {
+	margin: 20px;
 }
