@@ -1,85 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="這是測試用網頁 (?">
-    <meta property="og:title" content="OAO">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="http://localhost:8080">
-    <meta property="og:description" content="這是測試用網頁 (?" />
-    <meta property="og:image" content="image/0463.jpg"/>
-    <meta property="og:site_name" content="OSO">
-    <title>OAO - index</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="這是測試用網頁 (?">
+	<meta property="og:title" content="OAO">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="http://localhost:8080">
+	<meta property="og:description" content="這是測試用網頁 (?" />
+	<meta property="og:image" content="image/0463.jpg"/>
+	<meta property="og:site_name" content="OSO">
+	<title>OAO - index</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-    <div id="main">
-        <h3>For Test XD</h3>
-        <div id="space1">
-            <div>
-                <div class="btn" onclick="fbData.FbInit()">Login</div>
-                <div class="btn" onclick="fbData.shareFb('www.google.com.tw', '測試的title', '測試XD', 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/486392_102017646675278_1690642831_n.jpg?oh=bb6c7c11c03e9d3cbfd2013d9cedf785&oe=57A55AB8');">share</div>
-            </div>
-            <div>
-                <span class="line_btn">
-                    <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
-                    <script type="text/javascript">
-                        new media_line_me.LineButton({"pc":false,"lang":"zh-hant","type":"c"});
-                    </script>
-                </span>
-            </div>
-            <div>
-                <a href="line://msg/image/(可能是剪貼簿內的檔案名稱)">傳送內建圖片 (iOS 7無效)</a>
-                <a href="line://msg/text/http://tw.yahoo.com">傳送指定文字</a>
-            </div>
-            <div>
-                <a href="http://line.naver.jp/R/msg/text/?LINE%E3%81%A7%E9%80%81%E3%82%8B%0D%0Ahttp%3A%2F%2Fline.naver.jp%2F"><img src="image/0463.jpg" width="100px" height="100px" alt="用LINE傳送" /></a>
-            </div>
-        </div>
-        <div id="space2">
-            <script>
-                
-            </script>
-        </div>
-    </div>
+	<div id="main">
+		<h3>For Test XD</h3>
+		<div class="space">
+			<div class="btn" onclick="fbData.FbInit()">Login</div>
+			<div class="btn" onclick="fbData.shareFb('www.google.com.tw', '測試的title', '測試XD', 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/486392_102017646675278_1690642831_n.jpg?oh=bb6c7c11c03e9d3cbfd2013d9cedf785&oe=57A55AB8');">share</div>
+		</div>
+		<div class="space">
+			<span class="line_btn">
+				<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+				<script type="text/javascript">
+					new media_line_me.LineButton({"pc":false,"lang":"zh-hant","type":"c"});
+				</script>
+			</span>
+		</div>
+		<div class="space">
+			<a href="line://msg/image/(可能是剪貼簿內的檔案名稱)">傳送內建圖片 (iOS 7無效)</a>
+			<a href="line://msg/text/http://tw.yahoo.com">傳送指定文字</a>
+		</div>
+		<div class="space">
+			<a href="http://line.naver.jp/R/msg/text/?LINE%E3%81%A7%E9%80%81%E3%82%8B%0D%0Ahttp%3A%2F%2Fline.naver.jp%2F"><img src="image/0463.jpg" width="100px" height="100px" alt="用LINE傳送" /></a>
+		</div>
+	</div>
 </body>
 <script src="js/jquery-1.12.3.min.js"></script>
 <!-- <script src="js/fb.js"></script> -->
 <script>
-    FB.api(
-        '/me',
-        'GET',
-        {"fields":"id,name,email"},
-        function(response) {
-          // Insert your code here
-        }
-    );
+	FB.api(
+		'/me',
+		'GET',
+		{"fields":"id,name,email"},
+		function(response) {
+		  // Insert your code here
+		}
+	);
 
-    function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        if (response.status === 'connected') {
-            console.log('success!');
-        } else {
-            console.log('fail.');
-        }
-    }
+	function statusChangeCallback(response) {
+		console.log('statusChangeCallback');
+		console.log(response);
+		if (response.status === 'connected') {
+			console.log('success!');
+		} else {
+			console.log('fail.');
+		}
+	}
 
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '1530441350596454',
-            xfbml      : true,
-            version    : 'v2.6'
-        });
-    };
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '1530441350596454',
+			xfbml      : true,
+			version    : 'v2.6'
+		});
+	};
 
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 </script>
 </html>
