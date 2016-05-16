@@ -35,10 +35,47 @@
 		<div class="space">
 			<a href="http://line.naver.jp/R/msg/text/?LINE%E3%81%A7%E9%80%81%E3%82%8B%0D%0Ahttp%3A%2F%2Fline.naver.jp%2F"><img src="image/0463.jpg" width="100px" height="100px" alt="用LINE傳送" /></a>
 		</div>
+		<div class="clearBtn" onclick="$('#space2').text('');">Clear</div>
+		<div id="space2"></div>
 	</div>
 </body>
 <script src="js/jquery-1.12.3.min.js"></script>
 <!-- <script src="js/fb.js"></script> -->
+<script>
+// mouse
+$(document).bind("mousedown", function(){
+	checkWhere();
+	$("#space2").append('down');
+});
+
+$(document).bind("mouseup", function(){
+	checkWhere();
+	$("#space2").append('up');
+});
+
+// touch
+$(document).bind("touchstart", function(){
+	checkWhere();
+	$("#space2").append('touch up');
+});
+
+$(document).bind("touchend", function(){
+	$("#space2").text('touch down');
+});
+
+$(document).bind("touchmove", function(){
+	$("#space2").append('x: ' + event.changedTouches[0].pageX + ', y: ' + event.changedTouches[0].pageY);
+});
+
+function checkWhere() {
+	var j = event.pageX,
+		k = event.pageY;
+
+		console.log('j: ' + j + ', k: ' + k);
+
+		$("#space2").append('<div class="text">j: ' + j + ', k: ' + k + '</div>');
+}
+</script>
 <script>
 	// FB.api(
 	// 	'/me',
