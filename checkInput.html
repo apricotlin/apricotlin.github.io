@@ -8,7 +8,7 @@
 	<meta property="og:title" content="OAO">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="http://apricotlin.github.io/checkInput.html">
-	<meta property="og:description" content="這是測試用首頁 (?" />
+	<meta property="og:description" content="這是測試用網頁 (?" />
 	<meta property="og:image" content="image/0463.jpg"/>
 	<meta property="og:site_name" content="OAO">
 	<title>OAO</title>
@@ -20,10 +20,18 @@
 		input {
 			margin: 7px;
 		}
+		#test_form {
+			border: 1px #000 solid;
+			margin-bottom: 30px;
+		}
+		#test_form1 {
+			border: 1px blue solid;
+		}
 	</style>
 </head>
 <body>
 	<div style="width: 50%; margin: auto; margin-top: 70px;">
+		<div>方法1</div>
 		<form action="" id="test_form">
 			<ul>
 				<li><input type="radio" class="gender" name="gender" value="male" checked>Male</li>
@@ -31,11 +39,19 @@
 				<li><input type="radio" class="gender" name="gender" value="other">Other</li>
 			</ul>
 		</form>
+		<div>方法2</div>
+		<form action="" id="test_form1">
+			<ul>
+				<li><input type="radio" class="gender" name="gender" value="male" id="male" checked><label for="male">Male</label></li>
+				<li><input type="radio" class="gender" name="gender" value="female" id="female"><label for="female">Female</label></li>
+				<li><input type="radio" class="gender" name="gender" value="other" id="other"><label for="other">Other</label></li>
+			</ul>
+		</form>
 	</div>
 </body>
 <script src="js/jquery-1.12.3.min.js"></script>
 <script>
-	$("li").click(function(){
+	$("#test_form li").click(function(){
 		$(this).children("input").prop("checked", true);
 	});
 </script>
