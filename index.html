@@ -22,7 +22,12 @@
 		</div>
 		<div id="big_banner">
 			<div class="banner_img" style="background-image: url('http://c2.staticflickr.com/2/1696/26181899121_37a9c4e4e1_z.jpg');"></div>
-			<!-- <div class="banner_img" style="background-image: url('http://c6.staticflickr.com/2/1659/26181898701_eec28cf973_z.jpg');"></div> -->
+			<div class="banner_img" style="background-image: url('http://c6.staticflickr.com/2/1659/26181898701_eec28cf973_z.jpg');"></div>
+			<div class="banner_img" style="background-image: url('http://c2.staticflickr.com/2/1444/25645443673_79d0f63e53.jpg');"></div>
+		</div>
+		<div id="banner_arrow">
+			<div class="arrow arrow_left"> > </div>
+			<div class="arrow arrow_right"> < </div>
 		</div>
 		<div class="space">
 			<div class="btn" onclick="fbData.FbInit()">Login</div>
@@ -51,14 +56,37 @@
 <script src="js/meowmeow.js"></script>
 <script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
 <script>
-	// $("#big_banner").carouFredSel({
-	// 	width:       '100%',
-	// 	auto: {
-	// 		play: false,
-	// 		timeoutDuration: 5000,
-	// 	},
-	// 	item: {
-	// 	}
-	// });
+$(window).ready(function(){
+	$(".banner_img").css('width', $("#main").width());
+});
+	$("#big_banner").carouFredSel({
+		direction           : "left",
+        width               : '100%',
+        height              : 'auto',
+        infinite            : true,
+        // responsive          : true,
+        // circular            : true,
+        auto: {
+            play: true,
+            timeoutDuration: 5000,
+        },
+        scroll : {
+            items           : 1,
+            duration        : 700,
+            pauseOnHover    : true,
+            easing          : 'quadratic'
+        },
+        swipe: {
+            onMouse: true,
+            onTouch: true
+        },
+        // items: {
+        // 	width: 640,
+        // 	height: 430
+        // }
+        next                : ".arrow_left",
+        prev                : ".arrow_right",
+    }, {debug: true
+	});
 </script>
 </html>
