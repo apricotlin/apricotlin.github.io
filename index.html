@@ -17,18 +17,7 @@
 </head>
 <body>
 	<div id="main">
-		<div id="head">
-			<div class="logo"><a href="index.html"><img src="image/0463.jpg" alt="蛇饅頭"></a></div>
-			<div class="home_title">For Test XD</div>
-			<div id="head_menu">
-				<ul>
-					<li><a href="TestPage.html">Test Page</a></li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-			</div>
-		</div>
+		<div w3-include-html="header.html"></div>
 		<div id="big_banner">
 			<div class="banner_img" style="background-image: url('http://c2.staticflickr.com/2/1696/26181899121_37a9c4e4e1_z.jpg');"></div>
 			<div class="banner_img" style="background-image: url('http://c6.staticflickr.com/2/1659/26181898701_eec28cf973_z.jpg');"></div>
@@ -38,46 +27,46 @@
 			<div class="arrow arrow_left"> > </div>
 			<div class="arrow arrow_right"> < </div>
 		</div>
-		<div id="foot">
-			By Apricotlin
-		</div>
+		<div w3-include-html="foot.html"></div>
 	</div>
 </body>
 <script src="js/jquery-1.12.3.min.js"></script>
 <script src="js/meowmeow.js"></script>
 <script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
 <script>
 $(window).ready(function(){
 	$(".banner_img").css('width', $("#main").width());
 });
-	$("#big_banner").carouFredSel({
-		direction           : "left",
-        width               : '100%',
-        height              : 'auto',
-        infinite            : true,
-        // responsive          : true,
-        // circular            : true,
-        auto: {
-            play: true,
-            timeoutDuration: 5000,
-        },
-        scroll : {
-            items           : 1,
-            duration        : 700,
-            pauseOnHover    : true,
-            easing          : 'quadratic'
-        },
-        swipe: {
-            onMouse: true,
-            onTouch: true
-        },
-        // items: {
-        // 	width: 640,
-        // 	height: 430
-        // }
-        next                : ".arrow_left",
-        prev                : ".arrow_right",
-    }, {debug: true
-	});
+$("#big_banner").carouFredSel({
+	direction           : "left",
+    width               : '100%',
+    height              : 'auto',
+    infinite            : true,
+    // responsive          : true,
+    // circular            : true,
+    auto: {
+        play: true,
+        timeoutDuration: 5000,
+    },
+    scroll : {
+        items           : 1,
+        duration        : 700,
+        pauseOnHover    : true,
+        easing          : 'quadratic'
+    },
+    swipe: {
+        onMouse: true,
+        onTouch: true
+    },
+    // items: {
+    // 	width: 640,
+    // 	height: 430
+    // }
+    next                : ".arrow_left",
+    prev                : ".arrow_right",
+	// }, {debug: true
+});
+w3IncludeHTML();
 </script>
 </html>

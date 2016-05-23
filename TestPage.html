@@ -17,18 +17,7 @@
 </head>
 <body>
 	<div id="main">
-		<div id="head">
-			<div class="logo"><a href="index.html"><img src="image/0463.jpg" alt="蛇饅頭"></a></div>
-			<div class="home_title">For Test XD</div>
-			<div id="head_menu">
-				<ul>
-					<li><a href="TestPage.html">Test Page</a></li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-			</div>
-		</div>
+		<div w3-include-html="header.html"></div>
 		<div class="space">
 			<div class="btn" onclick="fbData.FbInit()">Login</div>
 			<div class="btn" onclick="fbData.shareFb('www.google.com.tw', '測試的title', '測試XD', 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/486392_102017646675278_1690642831_n.jpg?oh=bb6c7c11c03e9d3cbfd2013d9cedf785&oe=57A55AB8');">share</div>
@@ -52,11 +41,13 @@
 			<div class="btn" onclick="$('#space2').text('');">Clear</div>
 			<div id="space2"></div>
 		</div>
-		<div id="foot">
-			By Apricotlin
-		</div>
+		<div w3-include-html="foot.html"></div>
 	</div>
 </body>
 <script src="js/jquery-1.12.3.min.js"></script>
 <script src="js/meowmeow.js"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script>
+w3IncludeHTML();
+</script>
 </html>

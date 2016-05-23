@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="這是測試用網頁 (?">
+	<meta property="og:title" content="OAO">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="http://apricotlin.github.io">
+	<meta property="og:description" content="這是測試用網頁 (?" />
+	<meta property="og:image" content="image/0463.jpg"/>
+	<meta property="og:site_name" content="OSO">
+	<title>Album</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/album.css">
+</head>
+<body>
+	<div id="main">
+		<div w3-include-html="header.html"></div>
+		<div id="contain">
+			<div id="album">
+				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
+				<!-- <div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
+				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
+				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
+				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
+				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
+				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
+				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div> -->
+			</div>
+		</div>
+		<div w3-include-html="foot.html"></div>
+	</div>
+</body>
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/meowmeow.js"></script>
+<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script>
+$(document).ready(function(){
+	for (var i = 0; i < 16; i++) {
+		$("#album").append('<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>');
+	};
+});
+w3IncludeHTML();
+</script>
+</html>
