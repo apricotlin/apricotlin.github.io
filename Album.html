@@ -11,6 +11,7 @@
 	<meta property="og:description" content="這是測試用網頁 (?" />
 	<meta property="og:image" content="image/0463.jpg"/>
 	<meta property="og:site_name" content="OSO">
+	<link rel="shortcut icon" href="favicon.ico">
 	<title>Album</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
@@ -21,29 +22,65 @@
 		<div w3-include-html="header.html"></div>
 		<div id="contain">
 			<div id="album">
-				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
-				<!-- <div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
-				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
-				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
-				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
-				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
-				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>
-				<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div> -->
+				<p>Get it from my <a href="https://www.instagram.com/apricotlin/">Instagram</a>.</p>
 			</div>
 		</div>
 		<div w3-include-html="foot.html"></div>
 	</div>
 </body>
-<script src="js/jquery-1.12.3.min.js"></script>
-<script src="js/meowmeow.js"></script>
-<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
-<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<!-- <script type="text/javascript" src="js/js_calendar/jquery-ui.min.js"></script> -->
 <script>
-$(document).ready(function(){
-	for (var i = 0; i < 16; i++) {
-		$("#album").append('<div class="photo"><div class="phoot_img"><img src="image/album.jpg"></div></div>');
-	};
-});
+/* IG API */
+var token = "204214850.f343abf.e5082a2291024bb280e5ad3ef7239532",
+	ig_client_id = "f343abf1485441d39ad8fd77a5365a97";
+	ig_user_id = '204214850';
+
+// $(document).ready(function(){
+	getIGmedia(token, ig_client_id, ig_user_id);
+// });
+
+function getIGmedia(token, ig_client_id, ig_user_id) {
+	$.ajax({
+		url: 'https://api.instagram.com/v1/users/' + ig_user_id + '/media/recent',
+		dataType: 'jsonp',
+		type: "GET",
+		data: {
+			client_id: ig_client_id,
+			access_token: token,
+			count: 20
+		},
+		async: true,
+		error: function(xhr) {
+			alert("Ajax request 發生錯誤");
+			// setTimeout($.unblockUI, 500);
+		},
+		success: function(response) {
+			// console.log(response);
+
+			for( x in response.data ) {
+				var src = response.data[x].images.standard_resolution.url,
+					link = response.data[x].link;
+
+				$("#album").append('<div class="photo"><div class="phoot_img"><a href="' + link + '"><img src="' + src + '"></a></div></div>');
+				// data.data[x].images.low_resolution.url - URL of image, 306х306
+				// data.data[x].images.thumbnail.url - URL of image 150х150
+				// data.data[x].images.standard_resolution.url - URL of image 612х612
+				// data.data[x].link - Instagram post URL
+			}
+		}
+	});
+}
+
+// $(document).ready(function(){
+// 	for (var i = 0; i < 16; i++) {
+// 		$("#album").append('<div class="photo"><div class="phoot_img"><a href="#"><img src="image/album.jpg"></a></div></div>');
+// 	};
+// });
+</script>
+<script type="text/javascript" src="http://www.w3schools.com/lib/w3data.js"></script>
+<script>
+/* include other html files */
 w3IncludeHTML();
 </script>
 </html>
