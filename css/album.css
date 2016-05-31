@@ -17,6 +17,12 @@
 	margin-top: 30px;
 	text-align: center;
 }
+#album a {
+	color: #97CBFF;
+}
+#album a:active {
+	border-bottom: #97CBFF;
+}
 /*.photo:nth-child(4n+1) {
 	clear: both;
 }*/

@@ -22,7 +22,7 @@
 		<div w3-include-html="header.html"></div>
 		<div id="contain">
 			<div id="album">
-				<p>Get it from my <a href="https://www.instagram.com/apricotlin/">Instagram</a>.</p>
+				<p>Get it from my <a href="https://www.instagram.com/apricotlin/" target="_blank">Instagram</a>.</p>
 			</div>
 		</div>
 		<div w3-include-html="foot.html"></div>
@@ -36,10 +36,35 @@ var token = "204214850.f343abf.e5082a2291024bb280e5ad3ef7239532",
 	ig_client_id = "f343abf1485441d39ad8fd77a5365a97";
 	ig_user_id = '204214850';
 
-// $(document).ready(function(){
-	getIGmedia(token, ig_client_id, ig_user_id);
-// });
+getIGmedia(token, ig_client_id, ig_user_id);
+// getTagInfo();
 
+/* Get IG Tag Info (Not allow now) */
+// function getTagInfo() {
+// 	$.ajax({
+// 		url: 'https://api.instagram.com/v1/tags/' + '夏天' + '?access_token=ACCESS-TOKEN',
+// 		dataType: 'jsonp',
+// 		type: "GET",
+// 		data: {
+// 			client_id: ig_client_id,
+// 			access_token: token,
+// 			count: 20
+// 		},
+// 		async: true,
+// 		error: function(xhr) {
+// 			alert("Ajax request 發生錯誤");
+// 			// setTimeout($.unblockUI, 500);
+// 		},
+// 		success: function(response) {
+// 			console.log(response);
+
+// 			// for( x in response.data ) {
+// 			// }
+// 		}
+// 	});
+// }
+
+/* Get IG Media */
 function getIGmedia(token, ig_client_id, ig_user_id) {
 	$.ajax({
 		url: 'https://api.instagram.com/v1/users/' + ig_user_id + '/media/recent',
