@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<style type="text/css">
+		body {
+			font-family: 微軟正黑體;
+		}
+		.page-title {
+			text-align: center;
+			font-size: 3em;
+		}
+		#contain {
+			margin: auto;
+			margin-top: 70px;
+			text-align: center;
+			width: 50%;
+		}
+		#data {
+			border-bottom: 1px solid gray;
+			border-top: 1px solid gray;
+			width: 100%;
+		}
+		.view {
+			border: none;
+			width: 100px;
+		}
+		td {
+			padding: 10px;
+			width: 120px;
+		}
+		#message {
+			text-align: left;
+			width: 100%;
+		}
+		#footer {
+			color: gray;
+			font-size: 0.7em;
+			margin: auto;
+			margin-top: 30px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div class="page-title">懶人啤酒計算機</div>
+		<div id="contain">
+			<table id="data">
+				<tr>
+					<th>品質</th>
+					<th>穀物</th>
+					<th>礦泉水</th>
+					<th>發酵劑</th>
+					<th>砂糖</th>
+				</tr>
+				<tr>
+					<td>
+						<select id="quality" name="quality">
+							<option value="white">白</option>
+							<option value="green">綠</option>
+							<option value="blue">藍</option>
+						</select>
+					</td>
+					<td>
+						<input type="text" size="10" id="corn" name="corn" placeholder="請輸入穀物數量" />
+					</td>
+					<td>
+						<div id="water" class="view"></div>
+					</td>
+					<td>
+						<div id="leaven" class="view"></div>
+					</td>
+					<td>
+						<div id="suger" class="view"></div>
+					</td>
+				</tr>
+			</table>
+			<div id="message"></div>
+		</div>
+		<div id="footer">
+			<div>我只是真的很懶</div>
+			<div id="copyright">By Apricotlin</div>
+		</div>
+	</div>
+</body>
+<script>
+	$(document).ready(function() {
+		$("#corn").on("keyup", function() {
+			if ($(this).val() != "")
+				calculate();
+			else
+				clear();
+		});
+
+		$("#quality").on("change", function() {
+			calculate();
+		});
+	});
+
+	function calculate() {
+		// 開始都先清空訊息div
+			$("#message").text("");
+
+		var corn = parseInt($("#corn").val()),
+			afterFive = 0,
+			water = 0,
+			leaven = 0,
+			forMsg = 0,
+			quality = $("#quality").val(),
+			i = 0;
+
+		// 品質決定穀物份數
+		switch (quality)
+		{
+			case "white":
+				i = 5;
+			break;
+			case "green":
+				i = 3;
+			break;
+			case "blue":
+				i = 1;
+			break;
+		}
+		afterFive = Math.floor(corn/i);
+		forMsg = corn%i;
+
+		water = afterFive*6;
+		leaven = afterFive*2;
+
+		$("#water").text(water);
+		$("#leaven").text(leaven);
+		$("#suger").text(afterFive);
+
+		if (forMsg != 0)
+		{
+			$("#message").text("還會剩 " + forMsg + "個穀物");
+		}
+	}
+	function clear() {
+		$("#water").text("");
+		$("#leaven").text("");
+		$("#suger").text("");
+		$("#message").text("");
+	}
+</script>
+</html>
