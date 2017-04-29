@@ -132,13 +132,13 @@
 		honey = afterFive*3;
 		water = afterFive*7;
 
-		// $("#flower").html(flower+"<br /><span class=\"price\">("+(flower*npcItemPrice.flower.price)+"元)</span>");
-		// $("#honey").html(honey+"<br /><span class=\"price\">("+(honey*npcItemPrice.honey.price)+"元)</span>");
+		$("#flower").html(flower);
+		$("#honey").html(honey);
 		$("#water").html(afterFive+"<br /><span class=\"price\">("+(afterFive*npcItemPrice.water.price)+"元)</span>");
 
 		if (forMsg != 0)
 		{
-			$("#message").html("還會剩 " + forMsg + "個穀物");
+			$("#message").html("還會剩 " + forMsg + "個水果");
 		}
 	}
 	function clear() {
