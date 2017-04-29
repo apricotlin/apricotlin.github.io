@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/BlackDesert.css">
+</head>
+<body>
+	<div id="main">
+		<div class="page-title">懶人香味很好的茶計算機</div>
+		<div class="under-title"><a href="BeerCalculate.html">啤酒這邊走</a></div>
+		<div id="contain">
+			<table id="data">
+				<tr>
+					<th>品質</th>
+					<th>水果</th>
+					<th>花</th>
+					<th>食用蜂蜜</th>
+					<th>礦泉水</th>
+				</tr>
+				<tr>
+					<td>
+						<select id="quality" name="quality">
+							<option value="white">白</option>
+							<option value="green">綠</option>
+							<option value="blue">藍</option>
+						</select>
+					</td>
+					<td>
+						<input type="text" size="10" id="fruit" name="fruit" placeholder="請輸入數量" />
+					</td>
+					<td>
+						<div id="flower" class="view"></div>
+					</td>
+					<td>
+						<div id="honey" class="view"></div>
+					</td>
+					<td>
+						<div id="water" class="view"></div>
+					</td>
+				</tr>
+			</table>
+			<div id="message"></div>
+		</div>
+		<div id="footer">
+			<div>我只是真的很懶</div>
+			<div id="copyright">By Apricotlin</div>
+		</div>
+	</div>
+</body>
+<script>
+	// NPC材料價格
+	var npcItemPrice = {
+			"salt": {
+				"price": 20
+			},
+			"suger": {
+				"price": 20
+			},
+			"leaven": {
+				"price": 20
+			},
+			"oil": {
+				"price": 20
+			},
+			"seaSalt": {
+				"price": 200
+			},
+			"blackSuger": {
+				"price": 200
+			},
+			"oliveOil": {
+				"price": 40
+			},
+			"friedOil": {
+				"price": 40
+			},
+			"wine": {
+				"price": 40
+			},
+			"seasoning": {
+				"price": 40
+			},
+			"water": {
+				"price": 30
+			},
+		};
+
+	$(document).ready(function() {
+		$("#fruit").on("keyup", function() {
+			if ($(this).val() != "")
+				calculate();
+			else
+				clear();
+		});
+
+		$("#quality").on("change", function() {
+			calculate();
+		});
+	});
+
+	function calculate() {
+		// 開始都先清空訊息div
+		$("#message").html("");
+
+		var fruit = parseInt($("#fruit").val()),
+			afterFive = 0,
+			flower = 0,
+			honey = 0,
+			forMsg = 0,
+			quality = $("#quality").val(),
+			i = 0;
+
+		// 品質決定份數
+		switch (quality)
+		{
+			case "white":
+				i = 4;
+			break;
+			case "green":
+				i = 3;
+			break;
+			case "blue":
+				i = 1;
+			break;
+		}
+		afterFive = Math.floor(fruit/i);
+		forMsg = fruit%i;
+
+		flower = afterFive*4;
+		honey = afterFive*3;
+		water = afterFive*7;
+
+		// $("#flower").html(flower+"<br /><span class=\"price\">("+(flower*npcItemPrice.flower.price)+"元)</span>");
+		// $("#honey").html(honey+"<br /><span class=\"price\">("+(honey*npcItemPrice.honey.price)+"元)</span>");
+		$("#water").html(afterFive+"<br /><span class=\"price\">("+(afterFive*npcItemPrice.water.price)+"元)</span>");
+
+		if (forMsg != 0)
+		{
+			$("#message").html("還會剩 " + forMsg + "個穀物");
+		}
+	}
+	function clear() {
+		$("#flower").html("");
+		$("#honey").html("");
+		$("#water").html("");
+		$("#message").html("");
+	}
+</script>
+</html>
