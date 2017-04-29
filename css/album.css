@@ -1,0 +1,28 @@
+.photo {
+	/*background-color: #97CBFF;*/
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+	margin: 20px;
+}
+.photo img {
+	width: 200px;
+	height: 200px;
+	opacity: 0.7;
+}
+.photo img:hover {
+	opacity: 1;
+}
+#album {
+	margin-top: 30px;
+	text-align: center;
+}
+#album a {
+	color: #97CBFF;
+}
+#album a:active {
+	border-bottom: #97CBFF;
+}
+/*.photo:nth-child(4n+1) {
+	clear: both;
+}*/

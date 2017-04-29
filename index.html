@@ -1,85 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="這是測試用網頁 (?">
-    <meta property="og:title" content="OAO">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="http://localhost:8080">
-    <meta property="og:description" content="這是測試用網頁 (?" />
-    <meta property="og:image" content="image/0463.jpg"/>
-    <meta property="og:site_name" content="OSO">
-    <title>OAO - index</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="這是測試用網頁 (?">
+	<meta property="og:title" content="OAO">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="http://apricotlin.github.io">
+	<meta property="og:description" content="這是測試用首頁 (?" />
+	<meta property="og:image" content="image/0463.jpg"/>
+	<meta property="og:site_name" content="OSO">
+	<link rel="shortcut icon" href="favicon.ico">
+	<title>OAO - index</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-    <div id="main">
-        <h3>For Test XD</h3>
-        <div id="space1">
-            <div>
-                <div class="btn" onclick="fbData.FbInit()">Login</div>
-                <div class="btn" onclick="fbData.shareFb('www.google.com.tw', '測試的title', '測試XD', 'https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/486392_102017646675278_1690642831_n.jpg?oh=bb6c7c11c03e9d3cbfd2013d9cedf785&oe=57A55AB8');">share</div>
-            </div>
-            <div>
-                <span class="line_btn">
-                    <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
-                    <script type="text/javascript">
-                        new media_line_me.LineButton({"pc":false,"lang":"zh-hant","type":"c"});
-                    </script>
-                </span>
-            </div>
-            <div>
-                <a href="line://msg/image/(可能是剪貼簿內的檔案名稱)">傳送內建圖片 (iOS 7無效)</a>
-                <a href="line://msg/text/http://tw.yahoo.com">傳送指定文字</a>
-            </div>
-            <div>
-                <a href="http://line.naver.jp/R/msg/text/?LINE%E3%81%A7%E9%80%81%E3%82%8B%0D%0Ahttp%3A%2F%2Fline.naver.jp%2F"><img src="image/0463.jpg" width="100px" height="100px" alt="用LINE傳送" /></a>
-            </div>
-        </div>
-        <div id="space2">
-            <script>
-                
-            </script>
-        </div>
-    </div>
+	<div id="main">
+		<div w3-include-html="header.html"></div>
+		<div id="big_banner">
+			<div class="banner_img" style="background-image: url('http://c2.staticflickr.com/2/1696/26181899121_37a9c4e4e1_z.jpg');"></div>
+			<div class="banner_img" style="background-image: url('http://c6.staticflickr.com/2/1659/26181898701_eec28cf973_z.jpg');"></div>
+			<div class="banner_img" style="background-image: url('http://c2.staticflickr.com/2/1444/25645443673_79d0f63e53.jpg');"></div>
+		</div>
+		<div id="banner_arrow">
+			<div class="arrow arrow_left"> > </div>
+			<div class="arrow arrow_right"> < </div>
+		</div>
+		<div w3-include-html="foot.html"></div>
+	</div>
 </body>
-<script src="js/jquery-1.12.3.min.js"></script>
-<!-- <script src="js/fb.js"></script> -->
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="js/meowmeow.js"></script>
+<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
 <script>
-    FB.api(
-        '/me',
-        'GET',
-        {"fields":"id,name,email"},
-        function(response) {
-          // Insert your code here
-        }
-    );
-
-    function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        if (response.status === 'connected') {
-            console.log('success!');
-        } else {
-            console.log('fail.');
-        }
-    }
-
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '1530441350596454',
-            xfbml      : true,
-            version    : 'v2.6'
-        });
-    };
-
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+$(window).ready(function(){
+	$(".banner_img").css('width', $("#main").width());
+});
+$("#big_banner").carouFredSel({
+	direction           : "left",
+    width               : '100%',
+    height              : 'auto',
+    infinite            : true,
+    // responsive          : true,
+    // circular            : true,
+    auto: {
+        play: true,
+        timeoutDuration: 5000,
+    },
+    scroll : {
+        items           : 1,
+        duration        : 700,
+        pauseOnHover    : true,
+        easing          : 'quadratic'
+    },
+    swipe: {
+        onMouse: true,
+        onTouch: true
+    },
+    // items: {
+    // 	width: 640,
+    // 	height: 430
+    // }
+    next                : ".arrow_left",
+    prev                : ".arrow_right",
+	// }, {debug: true
+});
+w3IncludeHTML();
 </script>
 </html>

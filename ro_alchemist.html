@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RO煉金配藥自動計算機</title>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<style>
+		#main {
+			width: 500px;
+			margin: auto;
+			background-color: #FFFFDF;
+			padding: 10px;
+			border-radius: 10px;
+		}
+		#footer {
+			color: #9c9c9c;
+			font-size: 10px;
+			margin: auto;
+			padding: 10px;
+			width: 500px;
+		}
+		#getAns {
+		}
+		.bigT {
+			margin-top: 30px;
+			margin-bottom: 30px;
+			font-size: 30px;
+		}
+		.tt {
+			margin: 10px;
+		}
+		#cal, #forAns {
+			display: inline-block;
+			margin-right: 30px;
+		}
+		.inputNum {
+			margin-bottom: 20px;
+		}
+		#forAns div{
+			margin-bottom: 20px;
+		}
+		.article {
+		}
+		#cal {
+			background-color: lightblue;
+			border-radius: 10px;
+			padding: 10px;
+		}
+		#forAns {
+			background-color: pink;
+			border-radius: 10px;
+			padding: 10px;
+		}
+		.redtt {
+			color: red;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div class="bigT">RO煉金配藥自動計算機 (?)</div>
+		<div class="article">
+			<div id="cal">
+			<!-- <div class="tt">公式：知識藥水Lv×1 + 配藥Lv×3 + Joblv×0.2 + Dex×0.1 + Luk×0.1 + Int×0.05 + 補正</div> -->
+				<div class="inputNum">知識藥水等級 : <input type="text" size="10" name="knowledge" class="knowledge" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="最高是10" /></div>
+				<div class="inputNum">配藥等級：<input type="text" size="10" name="medicine" class="medicine" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="最高是10" /></div>
+				<div class="inputNum">JOB等級：<input type="text" size="10" name="job" class="job" onkeyup="value=value.replace(/[^\d]/g,'')" /></div>
+				<div class="inputNum">DEX：<input type="text" size="10" name="dex" class="dex" onkeyup="value=value.replace(/[^\d]/g,'')" /></div>
+				<div class="inputNum">LUK：<input type="text" size="10" name="luk" class="luk" onkeyup="value=value.replace(/[^\d]/g,'')" /></div>
+				<div class="inputNum">INT：<input type="text" size="10" name="num_int" class="num_int" onkeyup="value=value.replace(/[^\d]/g,'')" /></div>
+				<div class="inputNum">補正：
+					<select name="correction" id="correction">
+						<option value="" disabled="disabled" selected>請選擇</option>
+						<option value="0.2">一般藥水</option>
+						<option value="-0.05">藍色藥水</option>
+						<option value="-0.05">紅色纖細藥水</option>
+						<option value="-0.08">黃色纖細藥水</option>
+						<option value="-0.1">白色纖細藥水</option>
+						<option value="0.1">酒精</option>
+						<option value="0">特殊瓶</option>
+						<option value="-0.1">護貝藥</option>
+						<option value="-0.05">曼特療傷藥、蘆薈汁液</option>
+						<option value="-0.05">艾普利歐</option>
+						<option value="-0.05">抵抗藥水</option>
+					</select>
+				</div>
+			</div>
+			<div id="forAns">
+				<div id="getAns"><input type="button" value="送出" onclick="calculate();" /></div>
+				<div id="ans">成功率：</div>
+			</div>
+		</div>
+		<div id="footer">made by apricotlin</div>
+	</div>
+</body>
+<script>
+	function calculate () {
+		var knowledge = ($(".knowledge").val() < 0)? "a" : $(".knowledge").val(),
+			medicine = ($(".medicine").val() < 0)? "b" : $(".medicine").val(),
+			job = ($(".job").val() < 0)? "c" : $(".job").val(),
+			dex = ($(".dex").val() < 0)? "d" : $(".dex").val(),
+			luk = ($(".luk").val() < 0)? "e" : $(".luk").val(),
+			num_int = ($(".num_int").val() < 0)? "f" : $(".num_int").val(),
+			correction = parseFloat($("#correction").val());
+
+		if (parseInt(knowledge) || parseInt(medicine) || parseInt(job) || parseInt(dex) || parseInt(luk) || parseInt(num_int))
+		{
+			// 全部都是正整數，不做任何動作
+		}
+		else
+		{
+			$("#ans").html('<space class="redtt">有沒有少輸入資料？<space>');
+			return false;
+		}
+
+		if (knowledge > 10)
+		{
+			$("#ans").html('<space class="redtt">技能等級不會超過10喔~<space>');
+			return false;
+		}
+		else if (medicine > 10)
+		{
+			$("#ans").html('<space class="redtt">技能等級不會超過10喔~<space>');
+			return false;
+		}
+
+		ans = (knowledge * 1) + (medicine * 3) + (job * 0.2) + (dex * 0.1) + (luk * 0.1) + (num_int * 0.05) + correction;
+		ans = ans.toFixed(2);
+		// msg = knowledge * 1 + ' + ' + medicine * 3 + ' + ' + job * 0.2 + ' + ' + dex * 0.1 + ' + ' + luk * 0.1 + ' + ' + num_int * 0.05 + ' + ' + correction
+		$("#ans").html('成功率：' + ans + '%');
+	}
+</script>
+</html>
