@@ -9,6 +9,9 @@ body {
 	text-align: center;
 	font-size: 1em;
 }
+#menu li {
+	display: inline-block;
+}
 #contain {
 	margin: auto;
 	margin-top: 70px;
@@ -38,4 +41,9 @@ td {
 	margin: auto;
 	margin-top: 30px;
 	text-align: center;
+}
+
+/** 客製class **/
+.bold {
+	font-weight: bold;
 }

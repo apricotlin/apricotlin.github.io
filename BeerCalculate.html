@@ -3,13 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Hello</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/BlackDesert.css">
 </head>
 <body>
 	<div id="main">
+
+		<!-- header -->
+		<div w3-include-html="BlackDesert_Header.html"></div>
+
 		<div class="page-title">懶人啤酒計算機</div>
-		<div class="under-title"><a href="TeaCalculate.html">香味茶這邊走</a></div>
 		<div id="contain">
 			<table id="data">
 				<tr>
@@ -29,6 +31,7 @@
 					</td>
 					<td>
 						<input type="text" size="10" id="corn" name="corn" placeholder="請輸入穀物數量" />
+						<div id="corn_message" class="message" style="display: none;"></div>
 					</td>
 					<td>
 						<div id="water" class="view"></div>
@@ -41,21 +44,29 @@
 					</td>
 				</tr>
 			</table>
-			<div id="message"></div>
 		</div>
-		<div id="footer">
-			<div>我只是真的很懶</div>
-			<div id="copyright">By Apricotlin</div>
-		</div>
+
+		<!-- footer -->
+		<div w3-include-html="BlackDesert_Footer.html"></div>
+
 	</div>
 </body>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script src="js/BlackDesert.js"></script>
 <script>
 	$(document).ready(function() {
-		$("#corn").on("keyup", function() {
+		w3IncludeHTML();
+
+		$("#corn").bind("input propertychange", function() {
 			if ($(this).val() != "")
+			{
 				calculate();
+			}
 			else
+			{
 				clear();
+			}
 		});
 
 		$("#quality").on("change", function() {
@@ -64,11 +75,8 @@
 	});
 
 	function calculate() {
-		// 開始都先清空訊息div
-			$("#message").text("");
-
 		var corn = parseInt($("#corn").val()),
-			afterFive = 0,
+			quantity = 0,
 			water = 0,
 			leaven = 0,
 			forMsg = 0,
@@ -88,26 +96,26 @@
 				i = 1;
 			break;
 		}
-		afterFive = Math.floor(corn/i);
+		quantity = Math.floor(corn/i);
 		forMsg = corn%i;
 
-		water = afterFive*6;
-		leaven = afterFive*2;
+		water = quantity*6;
+		leaven = quantity*2;
 
-		$("#water").text(water);
-		$("#leaven").text(leaven);
-		$("#suger").text(afterFive);
+		$("#water").html(water + "<br /><span class=\"price\">(" + (water * npcItemPrice.water.price) + "元)</span>");
+		$("#leaven").html(leaven + "<br /><span class=\"price\">(" + (leaven * npcItemPrice.water.price) + "元)</span>");
+		$("#suger").html(quantity + "<br /><span class=\"price\">(" + (quantity * npcItemPrice.water.price) + "元)</span>");
 
 		if (forMsg != 0)
 		{
-			$("#message").text("還會剩 " + forMsg + "個穀物");
+			$("#corn_message").show();
+			$("#corn_message").text("還會剩 " + forMsg + "個穀物");
 		}
-	}
-	function clear() {
-		$("#water").text("");
-		$("#leaven").text("");
-		$("#suger").text("");
-		$("#message").text("");
+		else
+		{
+			$("#corn_message").hide();
+			$("#corn_message").text("");
+		}
 	}
 </script>
 </html>

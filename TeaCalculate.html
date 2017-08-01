@@ -3,149 +3,213 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Hello</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/BlackDesert.css">
 </head>
 <body>
 	<div id="main">
+
+		<!-- header -->
+		<div w3-include-html="BlackDesert_Header.html"></div>
+
 		<div class="page-title">懶人香味很好的茶計算機</div>
-		<div class="under-title"><a href="BeerCalculate.html">啤酒這邊走</a></div>
 		<div id="contain">
 			<table id="data">
 				<tr>
-					<th>品質</th>
+					<th></th>
 					<th>水果</th>
 					<th>花</th>
 					<th>食用蜂蜜</th>
 					<th>礦泉水</th>
 				</tr>
 				<tr>
+					<td></td>
 					<td>
-						<select id="quality" name="quality">
+						<input type="text" size="10" id="fruit" name="fruit" placeholder="請輸入數量" />
+						<div id="fruit_message" class="message" style="display: none;"></div>
+					</td>
+					<td>
+						<input type="text" size="10" id="flower" name="flower" placeholder="請輸入數量" />
+						<div id="flower_message" class="message" style="display: none;"></div>
+					</td>
+					<td>
+						<input type="text" size="10" id="honey" name="honey" placeholder="請輸入數量" />
+						<div id="honey_message" class="message" style="display: none;"></div>
+					</td>
+					<td>
+						<div id="water" class="view"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="bold">品質</td>
+					<td>
+						<select id="fruit_quality" name="fruit_quality">
 							<option value="white">白</option>
 							<option value="green">綠</option>
 							<option value="blue">藍</option>
 						</select>
 					</td>
 					<td>
-						<input type="text" size="10" id="fruit" name="fruit" placeholder="請輸入數量" />
-					</td>
-					<td>
-						<div id="flower" class="view"></div>
-					</td>
-					<td>
-						<div id="honey" class="view"></div>
-					</td>
-					<td>
-						<div id="water" class="view"></div>
+						<select id="flower_quality" name="flower_quality">
+							<option value="white">白</option>
+							<option value="green">綠</option>
+							<option value="blue">藍</option>
+						</select>
 					</td>
 				</tr>
 			</table>
-			<div id="message"></div>
 		</div>
-		<div id="footer">
-			<div>我只是真的很懶</div>
-			<div id="copyright">By Apricotlin</div>
-		</div>
+
+		<!-- footer -->
+		<div w3-include-html="BlackDesert_Footer.html"></div>
+
 	</div>
 </body>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script src="js/BlackDesert.js"></script>
 <script>
-	// NPC材料價格
-	var npcItemPrice = {
-			"salt": {
-				"price": 20
-			},
-			"suger": {
-				"price": 20
-			},
-			"leaven": {
-				"price": 20
-			},
-			"oil": {
-				"price": 20
-			},
-			"seaSalt": {
-				"price": 200
-			},
-			"blackSuger": {
-				"price": 200
-			},
-			"oliveOil": {
-				"price": 40
-			},
-			"friedOil": {
-				"price": 40
-			},
-			"wine": {
-				"price": 40
-			},
-			"seasoning": {
-				"price": 40
-			},
-			"water": {
-				"price": 30
-			},
-		};
-
 	$(document).ready(function() {
-		$("#fruit").on("keyup", function() {
-			if ($(this).val() != "")
-				calculate();
-			else
-				clear();
+		w3IncludeHTML();
+
+		$("#fruit, #flower, #honey").bind("input propertychange", function() {
+			calculate($(this).attr("name"));
 		});
 
-		$("#quality").on("change", function() {
-			calculate();
+		$("#fruit_quality, #flower_quality").on("change", function() {
+			calculate($(this).attr("name"));
 		});
 	});
 
-	function calculate() {
-		// 開始都先清空訊息div
-		$("#message").html("");
+	function checkInput() {
+		var num1 = $("#fruit").val(),
+			num2 = $("#flower").val(),
+			num3 = $("#honey").val();
 
-		var fruit = parseInt($("#fruit").val()),
-			afterFive = 0,
-			flower = 0,
-			honey = 0,
-			forMsg = 0,
-			quality = $("#quality").val(),
-			i = 0;
-
-		// 品質決定份數
-		switch (quality)
+		if ((num1 == "") && (num2 == "") && (num3 == ""))
 		{
-			case "white":
-				i = 4;
-			break;
-			case "green":
-				i = 3;
-			break;
-			case "blue":
-				i = 1;
-			break;
+			return "error";
 		}
-		afterFive = Math.floor(fruit/i);
-		forMsg = fruit%i;
-
-		flower = afterFive*4;
-		honey = afterFive*3;
-		water = afterFive*7;
-
-		$("#flower").html(flower);
-		$("#honey").html(honey);
-		$("#water").html(water+"<br /><span class=\"price\">("+(water*npcItemPrice.water.price)+"元)</span>");
-
-		if (forMsg != 0)
+		else if ((num1 == "") || (num2 == "") || (num3 == ""))
 		{
-			$("#message").html("還會剩 " + forMsg + "個水果");
+			clear();
 		}
 	}
-	function clear() {
-		$("#flower").html("");
-		$("#honey").html("");
-		$("#water").html("");
-		$("#message").html("");
+
+	function calculate(name) {
+		var msg = checkInput();
+		if (msg == "error") 
+		{
+			clear();
+			return 0; 
+		}
+
+		var fruit = ($("#fruit").val() != "")? parseInt($("#fruit").val()) : 0,
+			flower = ($("#flower").val() != "")? parseInt($("#flower").val()) : 0,
+			honey = ($("#honey").val() != "")? parseInt($("#honey").val()) : 0,
+			quantity = 0,
+			forMsg = 0,
+			fruit_quality = $("#fruit_quality").val(),
+			flower_quality = $("#flower_quality").val(),
+			i = 0;
+
+		if ((name == "fruit") || (name == "fruit_quality"))
+		{
+			// 品質決定份數
+			switch (fruit_quality)
+			{
+				case "white":
+					i = 4;
+				break;
+				case "green":
+					i = 3;
+				break;
+				case "blue":
+					i = 1;
+				break;
+			}
+			quantity = Math.floor(fruit/i);
+			forMsg = fruit%i;
+
+			flower = (fruit <= 4)? fruit : quantity*4;
+			honey = quantity*3;
+			water = quantity*7;
+
+			$("#flower_quality").val("white");
+
+			if (forMsg != 0)
+			{
+				$(".message").html("");
+				$("#fruit_message").show();
+				$("#fruit_message").text("還會剩 " + forMsg + "個水果");
+			}
+			else
+			{
+				$("#fruit_message").hide();
+				$("#fruit_message").text("");
+			}
+		}
+		else if ((name == "flower") || (name == "flower_quality"))
+		{
+			// 品質決定份數
+			switch (flower_quality)
+			{
+				case "white":
+					i = 4;
+				break;
+				case "green":
+					i = 3;
+				break;
+				case "blue":
+					i = 1;
+				break;
+			}
+			quantity = Math.floor(flower/i);
+			forMsg = fruit%i;
+
+			fruit = quantity*4;
+			honey = quantity*3;
+			water = quantity*7;
+
+			$("#fruit_quality").val("white");
+
+			if (forMsg != 0)
+			{
+				$(".message").html("");
+				$("#flower_message").show();
+				$("#flower_message").text("還會剩 " + forMsg + "朵花");
+			}
+			else
+			{
+				$("#flower_message").hide();
+				$("#flower_message").text("");
+			}
+		}
+		else if (name == "honey")
+		{
+			quantity = Math.floor(flower/3);
+			forMsg = fruit%3;
+
+			fruit = quantity*4;
+			flower = quantity*4;
+			water = quantity*7;
+
+			if (forMsg != 0)
+			{
+				$(".message").html("");
+				$("#honey_message").show();
+				$("#honey_message").text("還會剩 " + forMsg + "瓶蜂蜜");
+			}
+			else
+			{
+				$("#honey_message").hide();
+				$("#honey_message").text("");
+			}
+		}
+
+		$("#fruit").val(fruit);
+		$("#flower").val(flower);
+		$("#honey").val(honey);
+		$("#water").html(water + "<br /><span class=\"price\">(" + (water * npcItemPrice.water.price) + "元)</span>");
 	}
 </script>
 </html>
