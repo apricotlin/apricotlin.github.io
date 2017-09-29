@@ -205,7 +205,10 @@ console.log("color: " + index + ", " + answer + "*" + (colorMax - colorMin));
         });
 
         if (screen.length > 0) {
-            screenResult = screen;
+            screenResult = screen.val();
+        }
+        else if (generation == "X") {
+            screenResult = screenArray[0];
         }
         else {
             var screenMin = 1,
