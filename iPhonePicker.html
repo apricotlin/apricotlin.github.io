@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Iphone Picker!</title>
+    <style type="text/css">
+        #main {
+            background: #FFDEAD;
+            margin: auto;
+            width: 70%;
+        }
+        #which_phone {
+            /*margin: auto;*/
+        }
+        #random {
+            border: 1px solid;
+            margin: 20px 0 20px 20px;
+            padding: 5px;
+            text-align: center;
+            width: 200px;
+        }
+        #random:hover {
+            background: #FA8072;
+        }
+        #random:active {
+            background: #FFF5EE;
+        }
+        #result {
+            margin-left: 50px;
+            font-weight: bolder;
+        }
+        .inline {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+	<div id="main">
+		<table id="which_phone">
+			<tr>
+				<td>世代：</td>
+				<td>
+					<select name="generation" id="generation">
+						<option value="6" selected>iPhone 6</option>
+						<option value="6s">iPhone 6s</option>
+						<option value="7">iPhone 7</option>
+						<option value="8">iPhone 8</option>
+						<option value="X">iPhone X</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>顏色：</td>
+				<td>
+					<span><input type="checkbox" class="color" name="light_black" value="light_black" /> 黑色</span>
+					<span><input type="checkbox" class="color" name="black" value="black" /> 曜石黑</span>
+					<span><input type="checkbox" class="color" name="gray" value="gray" /> 太空灰色</span>
+					<span><input type="checkbox" class="color" name="silver" value="silver" /> 銀色</span>
+					<span><input type="checkbox" class="color" name="gold" value="gold" /> 金色</span>
+					<span><input type="checkbox" class="color" name="rose" value="rose" /> 玫瑰金</span>
+					<span><input type="checkbox" class="color" name="red" value="red" /> 紅色</span>
+				</td>
+			</tr>
+			<tr>
+				<td>尺寸：</td>
+				<td>
+					<span><input type="radio" class="screen" name="screen" value="4.7" /> 4.7</span>
+					<span><input type="radio" class="screen" name="screen" value="5.5" /> 5.5</span>
+                    <span><input type="radio" class="screen" name="screen" value="5.8" /> 5.8</span>
+				</td>
+			</tr>
+		</table>
+        <div id="random" class="inline">要買哪個iPhone呢？</div>
+        <div id="result" class="inline"></div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script type="text/javascript">
+    var allPhones = {
+                        "color": {
+                                    "6": [
+                                            "gray",
+                                            "silver",
+                                            "gold"
+                                        ],
+                                    "6s": [
+                                            "gray",
+                                            "silver",
+                                            "gold",
+                                            "rose"
+                                        ],
+                                    "7": [
+                                            "light_black",
+                                            "black",
+                                            "silver",
+                                            "gold",
+                                            "rose",
+                                            "red"
+                                        ],
+                                    "8": [
+                                            "gray",
+                                            "silver",
+                                            "gold"
+                                        ],
+                                    "X": [
+                                            "gray",
+                                            "silver"
+                                        ]
+                                },
+                        "screen": {
+                                    "6": [ "4.7", "5.5" ],
+                                    "6s": [ "4.7", "5.5" ],
+                                    "7": [ "4.7", "5.5" ],
+                                    "8": [ "4.7", "5.5" ],
+                                    "X": [ "5.8" ]
+                                }
+                    };
+
+	$("document").ready(function(){
+        Hide();
+        Choose(6);
+
+        // 世代選擇
+        $("#generation").on("change", function(){
+            var generation = $(this).val();
+            Hide();
+            Choose(generation);
+        });
+
+        $("#random").on("click", function(){
+            $("#result").text("");
+            var generation = $("#generation").val();
+            RandomPhone(generation);
+        });
+	});
+
+    // 隱藏顏色規格
+    function Hide() {
+        $(".color").parent().hide();
+        $(".screen").parent().hide();
+    }
+
+    // 世代選擇連動
+    function Choose(generation) {
+        var generation = generation,
+            colorArray = allPhones.color[generation],
+            screenArray = allPhones.screen[generation];
+
+        $(".color").each(function(){
+            var color = $(this).val();
+            var isHere = $.inArray(color, colorArray);
+
+            if (isHere != -1)
+            {
+                $(this).parent().show();
+            }
+        });
+
+        $(".screen").each(function(){
+            var screen = $(this).val();
+            var isHere = $.inArray(screen, screenArray);
+
+            if (isHere != -1)
+            {
+                $(this).parent().show();
+            }
+        });
+    }
+
+    // 抽iphone了
+    function RandomPhone(generation) {
+        var screenResult = "",
+            colorResult = "",
+            generation = generation,
+            colorArray = new Array(),
+            screenArray = allPhones.screen[generation],
+            screen = $("input[name='screen']:checked");
+        
+        if ($(".color:checked").length > 0) {
+            $(".color:checked").each(function(){
+                var colorName = $(this).parent().text();
+                colorArray.push(colorName);
+            });
+        }
+        else {
+            colorArray = allPhones.color[generation];
+        }
+
+        var colorMin = 1,
+            colorMax = colorArray.length;
+
+        var answer = Math.random();
+        var index = Math.round(answer * (colorMax - colorMin));
+console.log("color: " + index + ", " + answer + "*" + (colorMax - colorMin));
+        colorResult = colorArray[index];
+
+        $(".color").each(function(){
+            var color = $(this).val();
+
+            if (color == colorResult)
+            {
+                colorResult = $(this).parent().text();
+            }
+        });
+
+        if (screen.length > 0) {
+            screenResult = screen;
+        }
+        else {
+            var screenMin = 1,
+                screenMax = 100;
+            
+            var number = Math.floor(Math.random() * (screenMax - screenMin)) + screenMin;
+console.log("number: " + number);
+            screenResult = screenArray[number%2];
+        }
+
+        var str = "要買 " + colorResult + " 的 " + screenResult + " iPhone " + generation;
+
+        $("#result").text(str);
+    }
+</script>
+</html>
