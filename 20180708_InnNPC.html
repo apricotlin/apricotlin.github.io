@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+	<title>20180708</title>
+	<style type="text/css">
+		#main {
+			margin-left: auto;
+			margin-right: auto;
+			width: 70%;
+		}
+		#title {
+			font-size: 28px;
+			text-align: center;
+		}
+		.info {
+			margin: 30px auto 30px auto;
+			width: 500px;
+		}
+		.article {
+			border: 2px solid pink;
+			margin: 0 auto 50px auto;
+			padding: 30px;
+			width: 800px;
+		}
+		.content {
+			margin: 0 0 5px 0;
+		}
+		.small_gray {
+			color: #B0B0B0;
+			font-size: 12px;
+		}
+		img {
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="title">販售物品NPC的商品列表（含捲軸）會跳動</div>
+		<div class="info">
+			時間：2017-07-08 (其實是昨天無意間發現的)<br>
+			NPC資訊：海地爾南邊旅館，販售料理材料的NPC
+		</div>
+		<div class="article article1">
+			<div class="picture1 content">
+				首先是商品列表的部分：<br>
+				這是剛點進NPC的商品列表，圖上的發酵劑是點來當做記號的。
+			</div>
+			<img src="image/BlackDesert/2018-07-08_614388971.PNG">
+			
+			<div class="picture2 content">
+				接著，我們<b>用滑鼠滾輪把商品列表滾到底</b>，會發現發酵劑跑到右邊。
+			</div>
+			<img src="image/BlackDesert/2018-07-08_614393787.PNG">
+			
+			<div class="pciture3 content">
+				然後我們滾回最上方，<b>用滑鼠游標按住右邊的捲軸往下拉到底</b>，會發現商品列表其實是長這樣才對。<br>
+				<span class="small_gray">其實這邊不管按捲軸的哪裡（因為按比較下面會直接跳到最下面，按比較上面會需要自己往下拉），只要會讓商品列表到最下面即可</span>
+			</div>
+			<img src="image/BlackDesert/2018-07-08_614403754.PNG">
+			
+			<div class="content final"><br>
+				綜合以上實驗得知，應該是滑鼠滾輪滾下去的時候，可能同時觸發刷新列表<span class="small_gray">（因為每滾一次這邊的物品說明都會閃一次，所以我猜滾輪會觸發刷新；順帶一提，背包的是物品小圖會閃，所以一滾整個包包都滿閃的）</span>，但又不知道為什麼會有物品沒有被讀取到<span class="small_gray">（這邊我猜是古代克羅恩的香辛料，因為是後來新加的，也剛好就這麼一個）</span>，造成列表往左縮一格。<br><br>
+				其他NPC我沒有全部檢查，只跑了海地爾南邊除馬廄以外的NPC，不是商品數量太少不會有捲軸，就是商品數量剛好是雙數沒辦法做商品異位的測試。<br><br>
+				但以上都是純屬猜測，實際原因還是要麻煩官方研究測試並且修正（這個會修嗎？）。
+			</div>
+		</div>
+		<div class="article article2">
+			<div class="picture1 content">
+				再來是關於右邊捲軸的測試：<br>
+				用滑鼠滾輪滾下來的右邊捲軸都會是跟底部對齊的狀態。
+			</div>
+			<img src="image/BlackDesert/2018-07-08_619558361.PNG">
+
+			<div class="picture2 content">
+				但如果是用滑鼠游標按著往下拉的，<b>並且不要讓游標離開捲軸的圖案上</b>，右邊捲軸則會是突出底部的狀態。
+			</div>
+			<img src="image/BlackDesert/2018-07-08_619625780.PNG">
+
+			<div class="content final"><br>
+				總結一下有以下的情況：<br>
+				1. 當商品列表在最下面的時候，不管當下是上述哪一種狀態，只要用滾輪繼續往下滾就會刷新成滾輪的情況；而滑鼠游標的話也是同理。<br>
+				2. 用滑鼠游標拉右邊捲軸的時候，直到放開左鍵前都不要讓游標離開捲軸的圖案，就會讓右邊捲軸突出底部。<br>
+				3. 用滑鼠游標拉右邊捲軸的時候，按著左鍵並且讓游標離開捲軸的圖案才放開左鍵（要讓捲軸保持在最下方），就不會讓右邊捲軸突出底部。<br>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
